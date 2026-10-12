@@ -30,14 +30,14 @@ jobs:
           curl -L -o gradle.zip https://services.gradle.org/distributions/gradle-8.7-bin.zip
           unzip -q gradle.zip
 
-      - name: Build release APK
+      - name: Build installable APK
         env:
           ANDROID_HOME: /usr/local/lib/android/sdk
-        run: ./gradle-8.7/bin/gradle :app:assembleRelease --stacktrace
+        run: ./gradle-8.7/bin/gradle :app:assembleDebug --stacktrace
 
-      - name: Upload unsigned APK
+      - name: Upload installable APK
         uses: actions/upload-artifact@v4
         with:
-          name: leddun-android-release
-          path: app/build/outputs/apk/release/app-release-unsigned.apk
+          name: leddun-android-installable
+          path: app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
